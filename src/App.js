@@ -14,7 +14,7 @@ function App() {
   const [basket, setbasket] = useState([])
   return (
     <div className="App">
-      <basketContext.Provider value={[basket,setbasket]}>
+      <basketContext.Provider value={{basket,setbasket}}>
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<ProductList/>}/>

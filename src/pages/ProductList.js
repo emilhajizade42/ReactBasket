@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { basketContext } from '../App';
 import Navbar from '../layouts/Navbar';
 
-let URL = " https://northwind.vercel.app/api/products";
+let URL = "https://northwind.vercel.app/api/products";
 function ProductList() {
     const {basket,setbasket} = useContext(basketContext)
     let [data, setdata] = useState([])
@@ -16,7 +16,10 @@ function ProductList() {
         .then(res=>setdata(res.data))
     }
     function addBasket(id) {
-        setbasket(...basket,data[id])
+        console.log(data[id]);
+        console.log(id);
+        setbasket([...basket, data.find(d => d.id === id)])
+        console.log(basket); 
     }
     data.sort((a, b) => (a.id - b.id))
   return (
@@ -44,7 +47,7 @@ function ProductList() {
                             <td>{item.unitsInStock}</td>
                             <td>{item.name}</td>
                             <td>{item.reorderLevel}</td>
-                            <td><button className='btn btn-success' onClick={()=>alert("added")}>ADD BASKET</button></td>
+                            <td><button className='btn btn-success' onClick={()=>{addBasket(item.id)}}>ADD BASKET</button></td>
                             <td><Link className='btn btn-primary' to={`detail/${item.id}`} >GO DETAIL</Link ></td>
                         </tr>
                     ))}

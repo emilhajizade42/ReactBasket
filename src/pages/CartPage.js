@@ -32,6 +32,8 @@ function CartPage() {
     useEffect(() => {
     },[])
     function removeItem(id) {
+      console.log(id);
+      console.log(basket);
       setbasket(basket.filter(item=>item.id !== id))
     }
     
@@ -62,7 +64,7 @@ function CartPage() {
                             <td >{item.name}</td>
                             <td >{item.reorderLevel}</td>
                             <td ><button className='btn btn-danger' onClick={()=>{removeItem(item.id)}}>REMOVE BASKET</button></td>
-                            <td ><Link className='btn btn-primary' to={`detail/${item.id}`} >GO DETAIL</Link ></td>
+                            <td ><Link className='btn btn-primary' to={`/detail/${item.id}`} >GO DETAIL</Link ></td>
                         </tr>
                     ))}
                 </tbody>
