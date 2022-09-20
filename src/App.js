@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import { createContext, useState } from 'react';
+import ProductList from './pages/ProductList';
+import CartPage from './pages/CartPage';
+import DetailPage from './pages/DetailPage';
 
+export const basketContext = createContext();
 function App() {
+  const [basket, setbasket] = useState([])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <basketContext.Provider value={[basket,setbasket]}>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<ProductList/>}/>
+            <Route path='/cart' element={<CartPage/>}/>
+            <Route path='/detail/:id' element={<DetailPage/>}/>
+          </Routes>
+        </BrowserRouter>
+      </basketContext.Provider>
     </div>
   );
 }
